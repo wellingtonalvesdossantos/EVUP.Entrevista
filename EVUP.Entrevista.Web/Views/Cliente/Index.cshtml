@@ -1,0 +1,87 @@
+﻿@model IEnumerable<EVUP.Entrevista.Web.Models.ClienteVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Clientes</h2>
+
+<p>
+    <a class="btn btn-success" href="/Cliente/Create">Novo</a>
+</p>
+<table id="tblCliente" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+
+                    <button type="button" class="btn btn-link" data-item="@item.Id">Excluir</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-link").click(function () {
+                var id = $(this).attr('data-item');
+                if (confirm("Você tem certeza que gostaria de excluir este registro?")) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/Cliente/Delete/" + id,
+                        success: function (data) {
+                            
+                            $("#tblCliente tbody > tr").remove();
+                            $.each(data, function (i, cliente) {
+                                $("#tblCliente tbody").append(
+                                    "<tr>" +
+                                    "   <td>" + cliente.Nome + "</td>" +
+                                    "   <td>" + cliente.Telefone + "</td>" +
+                                    "   <td>" + cliente.Endereco + "</td>" +
+                                    "   <td>" +
+                                    "       <a href='/Cliente/Edit/" + cliente.Id + "'>Editar</a> |" +
+                                    "       <button type=\"button\" class=\"btn btn-link\" data-item=\"" + pessoa.Id + "\">Excluir</button>" +
+                                    "   </td>" +
+                                    "</tr>"
+                                );
+                            });
+                        },
+                        error: function (data) {
+                            alert("Houve um erro na pesquisa.");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
