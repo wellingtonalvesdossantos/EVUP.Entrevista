@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Entidades\MigrationInfo.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="ExtensionMethods\GenericExtensions.cs" />

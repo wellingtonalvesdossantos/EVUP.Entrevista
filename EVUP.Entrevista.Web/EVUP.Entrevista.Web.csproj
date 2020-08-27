@@ -164,6 +164,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\RelTarefa8Controller.cs" />
     <Compile Include="Controllers\RelTarefa7Controller.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
@@ -173,6 +174,7 @@
     </Compile>
     <Compile Include="Infraestrutura\DependencyRegister.cs" />
     <Compile Include="Models\ClienteVM.cs" />
+    <Compile Include="Models\UsuarioVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -193,6 +195,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\usuario.js" />
     <Content Include="Scripts\cliente.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -221,6 +224,9 @@
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\RelTarefa7\Index.cshtml" />
     <Content Include="Views\RelTarefa8\Index.cshtml" />
+    <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Usuario\Edit.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

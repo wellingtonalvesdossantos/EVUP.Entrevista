@@ -1,0 +1,58 @@
+﻿@model IEnumerable<EVUP.Entrevista.Web.Models.UsuarioVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Usuários</h2>
+
+<p>
+    <a class="btn btn-success" href="/Usuario/Create">Novo</a>
+</p>
+<table id="tblUsuario" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Login)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Login)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+
+                    <button type="button" class="btn btn-link" data-item="@item.Id">Excluir</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/Scripts/usuario.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-link").click(function () {
+                var id = $(this).attr('data-item');
+                deleteCliente(id);
+            });
+        });
+    </script>
+}

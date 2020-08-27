@@ -13,10 +13,12 @@ namespace EVUP.Entrevista.Web.Controllers
     public class RelTarefa8Controller : Controller
     {
         private IRepository<Cliente> repositorio = DependencyManager.Resolve<IRepository<Cliente>>();
+        private IRepository<Usuario> repUsuarios = DependencyManager.Resolve<IRepository<Usuario>>();
 
         List<ClienteVM> GetAll()
         {
-            return repositorio.Table.Where(x => x.Genero == "FEMININO" && x.Cidade == "JUNDIAÍ").Select(c => new ClienteVM()
+            var ids = repUsuarios.Table.Where(x => x.IsAdmin).Select(c => (long?)c.Id).ToArray();
+            return repositorio.Table.Where(x => ids.Contains(x.UsuarioId)).Select(c => new ClienteVM()
             {
                 Id = c.Id,
                 Nome = c.Nome,

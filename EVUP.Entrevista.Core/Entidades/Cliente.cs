@@ -36,6 +36,9 @@ namespace EVUP.Entrevista.Core.Entidades
         [Property]
         [GeneroValidation]
         public virtual string Genero { get; set; }
+
+        [Property]
+        public virtual long? UsuarioId { get; set; }
     }
 
     public class GeneroValidationAttribute : ValidationAttribute

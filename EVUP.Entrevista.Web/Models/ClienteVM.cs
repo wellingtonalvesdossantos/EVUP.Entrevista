@@ -34,5 +34,8 @@ namespace EVUP.Entrevista.Web.Models
         [Required]
         [Display(Name = "Gênero")]
         public string Genero { get; set; }
+
+        [Display(Name = "Usuário criador")]
+        public long? UsuarioId { get; set; }
     }
 }

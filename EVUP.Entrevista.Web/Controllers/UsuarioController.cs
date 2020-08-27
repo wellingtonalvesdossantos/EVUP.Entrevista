@@ -10,55 +10,46 @@ using System.Web.Mvc;
 
 namespace EVUP.Entrevista.Web.Controllers
 {
-    public class ClienteController : Controller
+    public class UsuarioController : Controller
     {
-        private IRepository<Cliente> repositorio = DependencyManager.Resolve<IRepository<Cliente>>();
-        private IRepository<Usuario> repUsuarios = DependencyManager.Resolve<IRepository<Usuario>>();
+        private IRepository<Usuario> repositorio = DependencyManager.Resolve<IRepository<Usuario>>();
 
-        List<ClienteVM> GetAll()
+        List<UsuarioVM> GetAll()
         {
-            return repositorio.Table.Select(c => new ClienteVM()
+            return repositorio.Table.Select(c => new UsuarioVM()
             {
                 Id = c.Id,
                 Nome = c.Nome,
-                Telefone = c.Telefone,
-                Endereco = c.Endereco,
-                Email = c.Email,
-                Cidade = c.Cidade,
-                Genero = c.Genero
+                Login = c.Login,
+                IsAdmin = c.IsAdmin,
             }).ToList();
         }
 
-        // GET: Cliente
+        // GET: Usuario
         public ActionResult Index()
         {
             return View(GetAll());
         }
 
-        // GET: Cliente/Create
+        // GET: Usuario/Create
         public ActionResult Create()
         {
-            SetViewBag();
             return View();
         }
 
-        // POST: Cliente/Create
+        // POST: Usuario/Create
         [HttpPost]
-        public ActionResult Create(ClienteVM model)
+        public ActionResult Create(UsuarioVM model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var entity = new Cliente()
+                    var entity = new Usuario()
                     {
                         Nome = model.Nome,
-                        Telefone = model.Telefone,
-                        Endereco = model.Endereco,
-                        Email = model.Email,
-                        Cidade = model.Cidade,
-                        Genero = model.Genero,
-                        UsuarioId = model.UsuarioId
+                        Login = model.Login,
+                        IsAdmin = model.IsAdmin,
                     };
 
                     using (var trans = repositorio.BeginTransaction())
@@ -72,7 +63,6 @@ namespace EVUP.Entrevista.Web.Controllers
                 }
                 else
                 {
-                    SetViewBag(model);
                     return View(model);
                 }
             }
@@ -82,21 +72,17 @@ namespace EVUP.Entrevista.Web.Controllers
             }
         }
 
-        // GET: Cliente/Edit/5
+        // GET: Usuario/Edit/5
         public ActionResult Edit(int id)
         {
             var model = repositorio.Table
                 .Where(c => c.Id == id)
-                .Select(c => new ClienteVM()
+                .Select(c => new UsuarioVM()
                 {
                     Id = c.Id,
                     Nome = c.Nome,
-                    Telefone = c.Telefone,
-                    Endereco = c.Endereco,
-                    Email = c.Email,
-                    Cidade = c.Cidade,
-                    Genero = c.Genero,
-                    UsuarioId = c.UsuarioId
+                    Login = c.Login,
+                    IsAdmin = c.IsAdmin
                 }).FirstOrDefault();
 
             if (model == null)
@@ -104,28 +90,23 @@ namespace EVUP.Entrevista.Web.Controllers
                 return HttpNotFound();
             }
 
-            SetViewBag(model);
             return View(model);
         }
 
-        // POST: Cliente/Edit/5
+        // POST: Usuario/Edit/5
         [HttpPost]
-        public ActionResult Edit(ClienteVM model)
+        public ActionResult Edit(UsuarioVM model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var entity = new Cliente()
+                    var entity = new Usuario()
                     {
                         Id = model.Id,
                         Nome = model.Nome,
-                        Telefone = model.Telefone,
-                        Endereco = model.Endereco,
-                        Email = model.Email,
-                        Cidade = model.Cidade,
-                        Genero = model.Genero,
-                        UsuarioId = model.UsuarioId
+                        Login = model.Login,
+                        IsAdmin = model.IsAdmin
                     };
 
                     using (var trans = repositorio.BeginTransaction())
@@ -139,7 +120,6 @@ namespace EVUP.Entrevista.Web.Controllers
                 }
                 else
                 {
-                    SetViewBag(model);
                     return View(model);
                 }
             }
@@ -149,7 +129,7 @@ namespace EVUP.Entrevista.Web.Controllers
             }
         }
 
-        // POST: Cliente/Delete/5
+        // POST: Usuario/Delete/5
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -168,17 +148,6 @@ namespace EVUP.Entrevista.Web.Controllers
             {
                 return View();
             }
-        }
-
-        private void SetViewBag()
-        {
-            SetViewBag(null);
-        }
-
-        private void SetViewBag(ClienteVM model)
-        {
-            var selected = model?.UsuarioId;
-            ViewBag.Usuarios = new SelectList(repUsuarios.Table.ToList(), "Id", "Nome", selected);
         }
     }
 }
