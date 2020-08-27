@@ -21,7 +21,10 @@ namespace EVUP.Entrevista.Web.Controllers
                 Id = c.Id,
                 Nome = c.Nome,
                 Telefone = c.Telefone,
-                Endereco = c.Endereco
+                Endereco = c.Endereco,
+                Email = c.Email,
+                Cidade = c.Cidade,
+                Genero = c.Genero
             }).ToList();
         }
 
@@ -49,7 +52,10 @@ namespace EVUP.Entrevista.Web.Controllers
                     {
                         Nome = model.Nome,
                         Telefone = model.Telefone,
-                        Endereco = model.Endereco
+                        Endereco = model.Endereco,
+                        Email = model.Email,
+                        Cidade = model.Cidade,
+                        Genero = model.Genero
                     };
 
                     using (var trans = repositorio.BeginTransaction())
@@ -66,7 +72,7 @@ namespace EVUP.Entrevista.Web.Controllers
                     return View(model);
                 }
             }
-            catch
+            catch(Exception e)
             {
                 return View();
             }
@@ -82,7 +88,10 @@ namespace EVUP.Entrevista.Web.Controllers
                     Id = c.Id,
                     Nome = c.Nome,
                     Telefone = c.Telefone,
-                    Endereco = c.Endereco
+                    Endereco = c.Endereco,
+                    Email = c.Email,
+                    Cidade = c.Cidade,
+                    Genero = c.Genero
                 }).FirstOrDefault();
 
             if (model == null)
@@ -106,7 +115,10 @@ namespace EVUP.Entrevista.Web.Controllers
                         Id = model.Id,
                         Nome = model.Nome,
                         Telefone = model.Telefone,
-                        Endereco = model.Endereco
+                        Endereco = model.Endereco,
+                        Email = model.Email,
+                        Cidade = model.Cidade,
+                        Genero = model.Genero
                     };
 
                     using (var trans = repositorio.BeginTransaction())
@@ -123,7 +135,7 @@ namespace EVUP.Entrevista.Web.Controllers
                     return View(model);
                 }
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }

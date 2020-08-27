@@ -15,12 +15,24 @@ namespace EVUP.Entrevista.Web.Models
         [Display(Name ="Nome")]
         public string Nome { get; set; }
 
-        [StringLength(12)]
+        [StringLength(20)]
         [Display(Name = "Telefone")]
         public string Telefone { get; set; }
 
         [StringLength(100)]
         [Display(Name = "Endereço")]
         public string Endereco { get; set; }
+
+        [StringLength(100)]
+        [Display(Name = "E-mail")]
+        public string Email { get; set; }
+
+        [StringLength(100)]
+        [Display(Name = "Cidade")]
+        public string Cidade { get; set; }
+
+        [Required]
+        [Display(Name = "Gênero")]
+        public string Genero { get; set; }
     }
 }

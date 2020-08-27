@@ -59,6 +59,47 @@ namespace EVUP.Entrevista.Core.Infraestrutura
             #region MIGRAÇÃO 2
 
             //ESCREVA AQUI MIGRAÇÃO
+            name = "alteração";
+            if (!migrations.Contains(name))
+            {
+                repositorio
+                            .CreateSQLQuery(
+                            @"alter table Cliente add
+                        email varchar(100) not null,
+                        cidade varchar(100),
+                        genero varchar(9)")
+                            .ExecuteUpdate();
+
+                using (var trans = repositorio.BeginTransaction())
+                {
+                    repositorio.Insert(new MigrationInfo() { Name = name });
+
+                    if (trans != null) repositorio.Commit();
+                } 
+            }
+
+            name = "tarefa5";
+            if (!migrations.Contains(name))
+            {
+                repositorio
+                            .CreateSQLQuery(
+                            @"create table Usuario (
+                                    id bigint identity primary key, 
+                                    nome varchar(100) not null,
+                                    login varchar(100) not null,
+                                    isAdmin bit not null)
+
+                                alter table Cliente add usuarioId bigint
+                                alter table Cliente add constraint FK_Cliente_Usuario foreign key (usuarioId) references Usuario (id)")
+                            .ExecuteUpdate();
+
+                using (var trans = repositorio.BeginTransaction())
+                {
+                    repositorio.Insert(new MigrationInfo() { Name = name });
+
+                    if (trans != null) repositorio.Commit();
+                }
+            }
 
             #endregion
         }

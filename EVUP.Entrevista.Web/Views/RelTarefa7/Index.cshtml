@@ -30,9 +30,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Genero)
             </th>
-            <th>
-
-            </th>
         </tr>
     </thead>
     <tbody>
@@ -58,25 +55,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Genero)
                 </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-
-                    <button type="button" class="btn btn-link" data-item="@item.Id">Excluir</button>
-                </td>
             </tr>
         }
     </tbody>
 </table>
 
 @section Scripts {
-    <script src="~/Scripts/cliente.js"></script>
-
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(".btn-link").click(function () {
-                var id = $(this).attr('data-item');
-                deleteCliente(id);
-            });
-        });
+        
     </script>
 }

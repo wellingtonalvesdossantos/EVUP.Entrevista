@@ -56,6 +56,7 @@
       <HintPath>..\packages\Remotion.Linq.EagerFetching.2.1.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -70,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Entidades\MigrationInfo.cs" />
     <Compile Include="Entidades\Cliente.cs" />
+    <Compile Include="ExtensionMethods\GenericExtensions.cs" />
     <Compile Include="Infraestrutura\BancoDadosManager.cs" />
     <Compile Include="Infraestrutura\DependencyRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
